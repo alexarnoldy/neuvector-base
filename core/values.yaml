@@ -68,7 +68,7 @@ controller:
         #  -----BEGIN PRIVATE KEY-----
         #  -----END PRIVATE KEY-----
   ranchersso:
-    enabled: true
+    enabled: false
   pvc:
     enabled: false
     accessModes:
