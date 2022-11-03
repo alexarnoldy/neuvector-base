@@ -1,6 +1,12 @@
 defaultNamespace: neuvector
 
 helm:
+  chart: crd
+  repo: https://neuvector.github.io/neuvector-helm
+  version: 2.2.3 
+  releaseName: neuvector
+
+helm:
   chart: core
   repo: https://neuvector.github.io/neuvector-helm
   version: 2.2.3 
