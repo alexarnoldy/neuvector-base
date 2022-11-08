@@ -1,0 +1,163 @@
+﻿apiVersion: v1
+items:
+- apiVersion: neuvector.com/v1
+  kind: NvSecurityRule
+  metadata:
+    name: nv.uss-constellation.default
+    namespace: default
+  spec:
+    dlp:
+      settings: []
+      status: true
+    egress:
+    - action: allow
+      applications:
+      - DNS
+      name: nv.rke2-coredns-rke2-coredns.kube-system-egress-0
+      ports: any
+      priority: 0
+      selector:
+        comment: ""
+        criteria:
+        - key: domain
+          op: =
+          value: kube-system
+        - key: service
+          op: =
+          value: rke2-coredns-rke2-coredns.kube-system
+        name: nv.rke2-coredns-rke2-coredns.kube-system
+        original_name: ""
+    - action: allow
+      applications:
+      - HTTP
+      name: external-egress-1
+      ports: any
+      priority: 0
+      selector:
+        comment: ""
+        criteria: []
+        name: external
+        original_name: ""
+    file:
+    - app:
+      - /bin/mkdir
+      behavior: block_access
+      filter: /media
+      recursive: true
+    ingress:
+    - action: deny
+      applications:
+      - nginx
+      name: nv.uss-constellation.default-ingress-0
+      ports: tcp/12345
+      priority: 0
+      selector:
+        comment: ""
+        criteria: []
+        name: nodes
+        original_name: ""
+    process:
+    - action: allow
+      allow_update: false
+      name: basename
+      path: /usr/bin/basename
+    - action: allow
+      allow_update: false
+      name: bash
+      path: /bin/bash
+    - action: allow
+      allow_update: false
+      name: cat
+      path: /bin/cat
+    - action: allow
+      allow_update: false
+      name: cut
+      path: /usr/bin/cut
+    - action: allow
+      allow_update: false
+      name: dash
+      path: /bin/dash
+    - action: allow
+      allow_update: false
+      name: date
+      path: /bin/date
+    - action: allow
+      allow_update: false
+      name: dpkg-query
+      path: /usr/bin/dpkg-query
+    - action: allow
+      allow_update: false
+      name: find
+      path: /usr/bin/find
+    - action: allow
+      allow_update: false
+      name: grep
+      path: /bin/grep
+    - action: allow
+      allow_update: false
+      name: head
+      path: /usr/bin/head
+    - action: allow
+      allow_update: false
+      name: ls
+      path: /bin/ls
+    - action: allow
+      allow_update: false
+      name: mawk
+      path: /usr/bin/mawk
+    - action: allow
+      allow_update: false
+      name: md5sum
+      path: /usr/bin/md5sum
+    - action: allow
+      allow_update: false
+      name: mkdir
+      path: /bin/mkdir
+    - action: allow
+      allow_update: false
+      name: more
+      path: /bin/more
+    - action: allow
+      allow_update: false
+      name: nginx
+      path: /usr/sbin/nginx
+    - action: allow
+      allow_update: false
+      name: pause
+      path: /pause
+    - action: allow
+      allow_update: false
+      name: sed
+      path: /bin/sed
+    - action: allow
+      allow_update: false
+      name: sort
+      path: /usr/bin/sort
+    - action: allow
+      allow_update: false
+      name: tail
+      path: /usr/bin/tail
+    - action: allow
+      allow_update: false
+      name: touch
+      path: /bin/touch
+    process_profile:
+      baseline: zero-drift
+    target:
+      policymode: Monitor
+      selector:
+        comment: ""
+        criteria:
+        - key: domain
+          op: =
+          value: default
+        - key: service
+          op: =
+          value: uss-constellation.default
+        name: nv.uss-constellation.default
+        original_name: ""
+    waf:
+      settings: []
+      status: true
+kind: List
+metadata: null
