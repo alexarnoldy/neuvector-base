@@ -1,0 +1,21 @@
+﻿apiVersion: neuvector.com/v1
+kind: NvAdmissionControlSecurityRule
+metadata:
+  name: local
+spec:
+  config:
+    client_mode: service
+    enable: true
+    mode: monitor
+  rules:
+  - action: deny
+    criteria:
+    - name: cveHighWithFixCount
+      op: '>='
+      value: "10"
+    - name: cveHighCount
+      op: '>='
+      value: "20"
+    - name: imageNoOS
+      op: =
+      value: "true"
