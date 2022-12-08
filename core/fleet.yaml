@@ -19,7 +19,7 @@ helm:
           ports:
             - port: 10443
               targetPort: 10443
-              nodePort: 30001
+              nodePort: 30002
 
     manager:
       svc:
