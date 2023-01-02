@@ -1,7 +1,7 @@
 apiVersion: neuvector.com/v1
 kind: NvAdmissionControlSecurityRule
 metadata:
-  name: annotationSECCOMPRuntimeDefault
+  name: annotationseccompruntimedefault
 spec:
   config:
     client_mode: service
