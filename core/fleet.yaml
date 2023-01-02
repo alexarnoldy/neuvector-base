@@ -7,7 +7,7 @@ helm:
   releaseName: neuvector
   values:
     registry: docker.io 
-    tag: 5.0.3
+    tag: 5.1.0
 
     controller:
       replicas: 1
@@ -19,11 +19,17 @@ helm:
           ports:
             - port: 10443
               targetPort: 10443
-              nodePort: 31002
+              nodePort: 30002
 
     manager:
       svc:
         type: NodePort
+        ports:
+          - name: manager
+            nodePort: 30003
+            port: 8443
+            protocol: TCP
+            targetPort: 8443
 
     cve:
       scanner:

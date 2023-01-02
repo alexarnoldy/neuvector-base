@@ -1,0 +1,25 @@
+apiVersion: neuvector.com/v1
+kind: NvAdmissionControlSecurityRule
+metadata:
+  name: readOnlyRootFilesystem
+spec:
+  config:
+    client_mode: service
+    enable: false
+    mode: monitor
+  rules:
+  - action: deny
+    comment: Block pods that do not enable readOnlyRootFilesystem
+    criteria:
+    - name: customPath
+      op: =
+      path: item.spec.containers[_].securityContext.readOnlyRootFilesystem
+      type: customPath
+      value: "false"
+      value_type: boolean
+    - name: ""
+      op: notExist
+      path: item.spec.containers[_].securityContext.readOnlyRootFilesystem
+      type: customPath
+      value: ""
+      value_type: key
