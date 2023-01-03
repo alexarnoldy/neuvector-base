@@ -1,7 +1,7 @@
 apiVersion: neuvector.com/v1
 kind: NvAdmissionControlSecurityRule
 metadata:
-  name: readonlyrootfilesystem
+  name: local
 spec:
   config:
     client_mode: service
@@ -20,6 +20,24 @@ spec:
     - name: ""
       op: notExist
       path: item.spec.containers[_].securityContext.readOnlyRootFilesystem
+      type: customPath
+      value: ""
+      value_type: key
+    - name: cveHighWithFixCount
+      op: '>='
+      value: "10"
+    - name: cveHighCount
+      op: '>='
+      value: "20"
+    - name: customPath
+      op: notContainsAny
+      path: item.annotations.seccomp.security.alpha.kubernetes.io/pod
+      type: customPath
+      value: "runtime/default"
+      value_type: string
+    - name: ""
+      op: notExist
+      path: item.annotations.seccomp.security.alpha.kubernetes.io/pod
       type: customPath
       value: ""
       value_type: key
