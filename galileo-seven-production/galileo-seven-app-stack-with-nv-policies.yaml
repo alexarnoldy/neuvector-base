@@ -1,151 +1,55 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: galileo-seven
-  
----
-
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: galileo-sa
-  namespace: galileo-seven
-automountServiceAccountToken: false
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  namespace: galileo-seven
-  name: galileo-role
-rules:
-- apiGroups: [""] # "" indicates the core API group
-  resources: ["pods"]
-  verbs: ["get", "watch", "list"]
-  
----
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: galileo-rb
-  namespace: galileo-seven
-subjects:
-- kind: ServiceAccount
-  name: galileo-sa
-  apiGroup: ""
-roleRef:
-  kind: Role 
-  name: galileo-role
-  apiGroup: rbac.authorization.k8s.io
-  
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: latimer 
-  namespace: galileo-seven
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: latimer
-  template:
-    metadata:
-      labels:
-        app: latimer
-    spec:
-      containers:
-      - name: nginx
-        image: katacoda/docker-http-server:latest
-        ports:
-        - containerPort: 80
-        
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: latimer-service
-  namespace: galileo-seven
-spec:
-  type: NodePort
-  selector:
-    app: latimer
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      nodePort: 30004
-        
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: gaetano
-  namespace: galileo-seven
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: gaetano
-  template:
-    metadata:
-      labels:
-        app: gaetano
-    spec:
-      containers:
-      - name: nginx
-        image: katacoda/docker-http-server:latest
-        ports:
-        - containerPort: 80
-        
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: gaetano-service
-  namespace: galileo-seven
-spec:
-  type: NodePort
-  selector:
-    app: gaetano
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      nodePort: 30005
-
----
-
-apiVersion: v1
 items:
 - apiVersion: neuvector.com/v1
-  kind: NvClusterSecurityRule
+  kind: NvSecurityRule
   metadata:
-    name: containers
-    namespace: ""
+    name: nv.gaetano.galileo-seven
+    namespace: galileo-seven
   spec:
     dlp:
       settings: []
       status: true
     egress: []
     file: []
-    ingress: []
-    process: []
+    ingress:
+    - action: allow
+      applications:
+      - HTTP
+      name: nv.gaetano.galileo-seven-ingress-0
+      ports: any
+      priority: 0
+      selector:
+        comment: ""
+        criteria: []
+        name: nodes
+        original_name: ""
+    process:
+    - action: allow
+      allow_update: false
+      name: app
+      path: /app
+    - action: deny
+      allow_update: false
+      name: bash
+      path: '*'
+    - action: allow
+      allow_update: false
+      name: pause
+      path: /pause
+    process_profile:
+      baseline: zero-drift
     target:
-      policymode: N/A
+      policymode: Protect
       selector:
         comment: ""
         criteria:
-        - key: container
+        - key: service
           op: =
-          value: '*'
-        name: containers
+          value: gaetano.galileo-seven
+        - key: domain
+          op: =
+          value: galileo-seven
+        name: nv.gaetano.galileo-seven
         original_name: ""
     waf:
       settings: []
@@ -165,7 +69,7 @@ items:
     - action: allow
       applications:
       - HTTP
-      name: nv.latimer.galileo-seven-ingress-0
+      name: nv.latimer.galileo-seven-ingress-1
       ports: any
       priority: 0
       selector:
@@ -176,14 +80,18 @@ items:
     process:
     - action: allow
       allow_update: false
-      name: nginx
-      path: /usr/sbin/nginx
+      name: app
+      path: /app
+    - action: deny
+      allow_update: false
+      name: bash
+      path: '*'
     - action: allow
       allow_update: false
       name: pause
       path: /pause
     process_profile:
-      baseline: basic
+      baseline: zero-drift
     target:
       policymode: Protect
       selector:
@@ -196,56 +104,6 @@ items:
           op: =
           value: galileo-seven
         name: nv.latimer.galileo-seven
-        original_name: ""
-    waf:
-      settings: []
-      status: true
-- apiVersion: neuvector.com/v1
-  kind: NvSecurityRule
-  metadata:
-    name: nv.gaetano.galileo-seven
-    namespace: galileo-seven
-  spec:
-    dlp:
-      settings: []
-      status: true
-    egress: []
-    file: []
-    ingress:
-    - action: allow
-      applications:
-      - HTTP
-      name: nv.gaetano.galileo-seven-ingress-2
-      ports: any
-      priority: 0
-      selector:
-        comment: ""
-        criteria: []
-        name: nodes
-        original_name: ""
-    process:
-    - action: allow
-      allow_update: false
-      name: nginx
-      path: /usr/sbin/nginx
-    - action: allow
-      allow_update: false
-      name: pause
-      path: /pause
-    process_profile:
-      baseline: basic
-    target:
-      policymode: Protect
-      selector:
-        comment: ""
-        criteria:
-        - key: service
-          op: =
-          value: gaetano.galileo-seven
-        - key: domain
-          op: =
-          value: galileo-seven
-        name: nv.gaetano.galileo-seven
         original_name: ""
     waf:
       settings: []
