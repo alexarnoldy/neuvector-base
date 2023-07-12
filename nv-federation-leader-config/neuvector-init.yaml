@@ -347,5 +347,5 @@ data:
 kind: ConfigMap
 metadata:
   name: neuvector-init
-  namespace: neuvector
+  namespace: cattle-neuvector-system 
 
