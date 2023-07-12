@@ -338,7 +338,7 @@ data:
           - reader1
           - reader2
     # Optional. value between 30 -- 3600  default 300
-      Timeout: 300
+      Timeout: 3600
     -
     # this user will overwrite the original admin user
       Fullname: admin
