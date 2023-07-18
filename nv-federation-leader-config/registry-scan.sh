@@ -1,0 +1,21 @@
+curl 'https://neuvector-demo.susealliances.com/k8s/clusters/c-m-bgthk662/api/v1/namespaces/cattle-neuvector-system/services/https:neuvector-service-webui:8443/proxy/scan/registry' \
+	-X PATCH \
+	-H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0' \
+	-H 'Accept: application/json, text/plain, */*' \
+	-H 'Accept-Language: en-US,en;q=0.5' \
+	-H 'Accept-Encoding: gzip, deflate, br' \
+	-H 'token: uMJH8VZDwAkwPYN5wS5YudyIeh3YylG7saCrfJWD+RZBbVIDPSFOUPNP1oBjcJRVCy_W9stddehO9p0g+DX+btP04vHD7uo2DZJNh9XvyXdpvcLYFInOp2ymtRE31+OmLNYD3G8_GHLwJQ7NXCUXi8Vt+MUdVoGAO6hMUoWLqD1FAFeNOUZw1BTTEjFFMn3i0JKfhhxsSkS5P7nBbhzE8ZzIO6mrHBgiVx5TjwT6E5Ye5nRYVrhL8JeJimPnH80vzpdKPftIaVkmy8vOBbE9YhW9lmK9vHdZny5YWTM8cF_g+PsQk+cwZgik28YdGsj3Ue3BgVdiqQ+opuYyI709cMvFqsnyVsZJe4DVxcCYgkZKIS6jmZQmqa4MSW25IgzMmeBFALjd+PI04h8HcjMfKQ+1adqwQFwbhYVpxQK3pNmMu_X4zFiWG67C8v6WfuKAaq1cLcP9Tk9MGC22Es8_sixDVXiBw5ZMd8f8q+0kh0RSO2wA_gM0J6G8UTrGc4Uo+cwFsnxWb4WoIQxDyeYT5ew6ZgixHMl37tV69giX46b8so+V4qwfiE3bgk9dyAL2+KwbgfcPEXrPrLNfMvq2ILnyPR+IjXWNEReaAD3ocH_hVRO+_pV0YiLMwvZf2GaYNYvBD+3x1_pHVRfjR3q0mGzppRHkuAKSs6nCs8BneWqlCQDUON7GgS34h_BWFxVY3LHF7zhBzsIC5ylgPIHcWyCus__b4rf1pH72ISEfx6c5Ki6vM+o76D60NK6fPvCkF17uszp8RXihhKxBnGOUe2kD6pyCL+7I5h_yKOjHDGKpAX7mbqJC4obslZuW3FqY4t020vUMPVD93gZQ75o2PMQvkn0QnAJ2qVy14ZUA4ICcPeEDSbdsB2vcZ9mCRDaE4bBYPoS4OsTsxUmXU634+F3apfUDbhzgO3rpVMSBPnS6cMPJKCKE4J48tMGEwISQhzIOUgCX4WW40BAlLMZ5v7sUIPSmSmMra+z5bUJQHODXku0vP3lDcj7eX7jMpzRQt68Q3Zzs1O9qYDBSor6icv+ovf0rJ6XhpjvqJoDhksxt0oq3+BRb0o7PAShcR1Ffm3+O5XwR7yj95YPIOGAcZ_7c7yxa0xIR52OpYT38saCm2tZti3W_wGY2zQPeYDdFxgG2ii2X2gHvCXtWQ+2160_U5fyYbw0rmwOWxd+JD5NEDHlBm3huoi8a0MOcSu+8E8wJEM5X5Mz1piaxs0HprnlzoFALcXbhdHcgDTBkwBcVq3k06hBcQluT_24vD8peERmrBDVNcjCTMJPrzgC0_e9es1WkXQMtuQ6mZk9tbTJJE6hfqmt1+g' \
+	-H 'Cache-Control: no-cache' \
+	-H 'Pragma: no-cache' \
+	-H 'Content-Type: application/json' \
+	-H 'Origin: https://neuvector-demo.susealliances.com' \
+	-H 'DNT: 1' \
+	-H 'Connection: keep-alive' \
+	-H 'Referer: https://neuvector-demo.susealliances.com/k8s/clusters/c-m-bgthk662/api/v1/namespaces/cattle-neuvector-system/services/https:neuvector-service-webui:8443/proxy/' \
+	-H 'Cookie: R_PCS=light; R_LOCALE=en-us; R_REDIRECTED=true; CSRF=83c07c4a92a743a1b0f672cb5773b558; R_SESS=token-pqf9d:jggrnqc4qpxk5wh2glx7dmqnz57jqxkbcrm6pd52tq94k4lqcrsf6d' \
+	-H 'Sec-Fetch-Dest: empty' \
+	-H 'Sec-Fetch-Mode: cors' \
+	-H 'Sec-Fetch-Site: same-origin' \
+	-H 'Sec-GPC: 1' \
+	-H 'TE: trailers' \
+	--data-raw '{"wrap":{"config":{"registry":"https://registry.hub.docker.com/","filters":["aarnoldy/*"],"rescan_after_db_update":true,"scan_layers":true,"username":"","password":"","schedule":{"schedule":"periodical","interval":300},"auth_with_token":false,"cfg_type":"user_created","registry_type":"Docker Registry","name":"aarnoldy-registry"}},"name":"aarnoldy-registry"}'
