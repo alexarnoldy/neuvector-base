@@ -123,3 +123,26 @@ spec:
       nodePort: 30005
 
 ---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sles-deployment
+  namespace: galileo-seven
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sles-pod
+  template:
+    metadata:
+      labels:
+        app: sles-pod
+    spec:
+      containers:
+        - name: sles-container
+          image: registry.suse.com/bci/bci-base:latest
+          command: ["bash"]
+          stdin: true
+          tty: true
+---          
