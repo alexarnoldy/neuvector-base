@@ -60,7 +60,6 @@ spec:
       containers:
       - name: nginx
         image: katacoda/docker-http-server:latest
-#        image: registry.susealliances.com/docker-http-server:latest
         ports:
         - containerPort: 80
         
